@@ -28,3 +28,10 @@ data/*
 # Misc
 *.zip
 .DS_Store
+
+# Local tooling / working files (not part of the submission)
+run_task*_overnight.sh
+results/*/_run_logs/
+results/*/qualitative_candidates.json
+*_walkthrough.ipynb
+results/report.md

@@ -1,0 +1,239 @@
+{
+  "name": "beta_0.3",
+  "adapter": "outputs/task1_dpo/beta_0.3",
+  "beta_for_loss": 0.3,
+  "seed": 6304,
+  "config_path": "configs/dpo.yaml",
+  "decoding": {
+    "temperature": 0.7,
+    "top_p": 0.9,
+    "do_sample": true,
+    "max_new_tokens": 256,
+    "max_prompt_length": 768,
+    "word_limit_samples_per_prompt": 5
+  },
+  "overlong_prompt_policy": "skip",
+  "dropped_overlong": {
+    "standard_eval": [
+      "1847",
+      "144",
+      "1474",
+      "1720",
+      "1269",
+      "1172",
+      "1135",
+      "1937",
+      "976",
+      "1689"
+    ],
+    "length_stratified_eval": [
+      "1540",
+      "452",
+      "558",
+      "1957",
+      "159",
+      "1474",
+      "600",
+      "1580",
+      "1962"
+    ]
+  },
+  "heldout_preference": {
+    "n": 290,
+    "preference_accuracy": 0.6344827586206897,
+    "dpo_loss": 0.6752139151096344,
+    "margin_mean": 0.1412608127141821,
+    "margin_std": 0.5201908805162174,
+    "chosen_logratio_mean": -0.07910154065887989,
+    "rejected_logratio_mean": -0.22036235332489013,
+    "n_rating_ties": 39,
+    "preference_accuracy_excluding_ties": 0.6573705179282868,
+    "n_margin_exactly_zero": 0
+  },
+  "length_stratified_preference": {
+    "all": {
+      "n": 237,
+      "preference_accuracy": 0.5949367088607594,
+      "dpo_loss": 0.6811478761681021,
+      "margin_mean": 0.0956856555576566,
+      "margin_std": 0.4479586980343574,
+      "chosen_logratio_mean": -0.15395959972832274,
+      "rejected_logratio_mean": -0.24964525528597933,
+      "n_rating_ties": 30,
+      "preference_accuracy_excluding_ties": 0.5990338164251208,
+      "n_margin_exactly_zero": 0
+    },
+    "preferred_longer": {
+      "n": 78,
+      "preference_accuracy": 0.4230769230769231,
+      "dpo_loss": 0.7016627650994521,
+      "margin_mean": -0.040239896529760115,
+      "margin_std": 0.4683576918726176,
+      "chosen_logratio_mean": -0.23313732636280549,
+      "rejected_logratio_mean": -0.19289742983304536,
+      "n_rating_ties": 9,
+      "preference_accuracy_excluding_ties": 0.43478260869565216,
+      "n_margin_exactly_zero": 0
+    },
+    "length_matched": {
+      "n": 80,
+      "preference_accuracy": 0.6,
+      "dpo_loss": 0.6837734654545784,
+      "margin_mean": 0.07416395619511604,
+      "margin_std": 0.388241276348367,
+      "chosen_logratio_mean": -0.1102608673274517,
+      "rejected_logratio_mean": -0.18442482352256775,
+      "n_rating_ties": 13,
+      "preference_accuracy_excluding_ties": 0.582089552238806,
+      "n_margin_exactly_zero": 0
+    },
+    "rejected_longer": {
+      "n": 79,
+      "preference_accuracy": 0.759493670886076,
+      "dpo_loss": 0.6582338447812237,
+      "margin_mean": 0.25168475697312176,
+      "margin_std": 0.43558331220684376,
+      "chosen_logratio_mean": -0.1200360037103484,
+      "rejected_logratio_mean": -0.37172076068347015,
+      "n_rating_ties": 8,
+      "preference_accuracy_excluding_ties": 0.7746478873239436,
+      "n_margin_exactly_zero": 0
+    }
+  },
+  "generation_eval_prompts": {
+    "n": 290,
+    "kl_token_mean_pooled": -0.00022729098901490025,
+    "kl_per_sequence_sum_mean": -0.035288101687609895,
+    "kl_per_response_token_mean_mean": 0.0006088546137514891,
+    "reward_mean": 1.2921735040072737,
+    "reward_std": 1.2138351926582782,
+    "response_tokens": {
+      "n": 290,
+      "mean": 155.2551724137931,
+      "std": 105.61245219884364,
+      "median": 206.0,
+      "q25": 35.5,
+      "q75": 256.0,
+      "iqr": 220.5,
+      "min": 2.0,
+      "max": 256.0
+    },
+    "word_count": {
+      "n": 290,
+      "mean": 111.45172413793104,
+      "std": 77.57300952890881,
+      "median": 132.0,
+      "q25": 27.75,
+      "q75": 183.5,
+      "iqr": 155.75,
+      "min": 1.0,
+      "max": 227.0
+    },
+    "truncation_rate": 0.43448275862068964
+  },
+  "word_limit": {
+    "n_samples": 50,
+    "n_prompts": 10,
+    "compliance_rate": 0.56,
+    "prompts_all_samples_compliant": 4,
+    "word_count": {
+      "n": 50,
+      "mean": 38.26,
+      "std": 16.173818349418916,
+      "median": 32.0,
+      "q25": 26.25,
+      "q75": 45.75,
+      "iqr": 19.5,
+      "min": 19.0,
+      "max": 82.0
+    },
+    "word_count_over_limit_ratio_mean": 1.066447619047619,
+    "response_tokens": {
+      "n": 50,
+      "mean": 45.18,
+      "std": 18.912101945579714,
+      "median": 38.0,
+      "q25": 32.0,
+      "q75": 57.75,
+      "iqr": 25.75,
+      "min": 22.0,
+      "max": 102.0
+    },
+    "reward_mean": 3.4227734375,
+    "per_prompt": [
+      {
+        "prompt_id": "wl01",
+        "word_limit": 40,
+        "compliance_rate": 1.0,
+        "mean_word_count": 29.8,
+        "mean_overshoot_words": 0.0
+      },
+      {
+        "prompt_id": "wl02",
+        "word_limit": 25,
+        "compliance_rate": 0.0,
+        "mean_word_count": 32.6,
+        "mean_overshoot_words": 7.6
+      },
+      {
+        "prompt_id": "wl03",
+        "word_limit": 30,
+        "compliance_rate": 1.0,
+        "mean_word_count": 23.6,
+        "mean_overshoot_words": 0.0
+      },
+      {
+        "prompt_id": "wl04",
+        "word_limit": 35,
+        "compliance_rate": 0.2,
+        "mean_word_count": 46.6,
+        "mean_overshoot_words": 11.6
+      },
+      {
+        "prompt_id": "wl05",
+        "word_limit": 45,
+        "compliance_rate": 0.2,
+        "mean_word_count": 58.6,
+        "mean_overshoot_words": 13.6
+      },
+      {
+        "prompt_id": "wl06",
+        "word_limit": 30,
+        "compliance_rate": 1.0,
+        "mean_word_count": 23.2,
+        "mean_overshoot_words": 0.0
+      },
+      {
+        "prompt_id": "wl07",
+        "word_limit": 35,
+        "compliance_rate": 0.2,
+        "mean_word_count": 47.8,
+        "mean_overshoot_words": 13.2
+      },
+      {
+        "prompt_id": "wl08",
+        "word_limit": 40,
+        "compliance_rate": 0.8,
+        "mean_word_count": 31.4,
+        "mean_overshoot_words": 0.8
+      },
+      {
+        "prompt_id": "wl09",
+        "word_limit": 30,
+        "compliance_rate": 1.0,
+        "mean_word_count": 26.4,
+        "mean_overshoot_words": 0.0
+      },
+      {
+        "prompt_id": "wl10",
+        "word_limit": 45,
+        "compliance_rate": 0.2,
+        "mean_word_count": 62.6,
+        "mean_overshoot_words": 17.8
+      }
+    ]
+  },
+  "status": "COMPLETED",
+  "wall_clock_s": 1329.4301869000774,
+  "peak_vram_gib": 6.654354572296143
+}

@@ -84,11 +84,22 @@ The PPO value checkpoint is intentionally released as the exact staff midpoint s
 ### Task 1 - DPO
 
 ```bash
-python -m task1_dpo.train --config configs/dpo.yaml --run-name standard
+python -m task1_dpo.evaluate --config configs/dpo.yaml --name sft                      # untouched SFT baseline row
+python -m task1_dpo.train --config configs/dpo.yaml --run-name standard                 # Step 1: one epoch
 python -m task1_dpo.evaluate --config configs/dpo.yaml --adapter outputs/task1_dpo/standard --name standard
-python -m task1_dpo.ablate_beta --config configs/dpo.yaml
-python -m task1_dpo.analyze_length --config configs/dpo.yaml
+python -m task1_dpo.ablate_beta --config configs/dpo.yaml                               # Step 2: beta in {0.03,0.10,0.30}, short budget
+python -m task1_dpo.analyze_length --config configs/dpo.yaml                            # Step 3: length-balanced run + strata
+python -m task1_dpo.summarize --config configs/dpo.yaml                                 # results.json, CSV tables, figures
 ```
+
+Outputs: adapters in `outputs/task1_dpo/<run>/`; training logs and run metadata in
+`results/task1_dpo/runs/<run>/`; per-pair margins, generations and metrics in
+`results/task1_dpo/eval/<model>/`; consolidated `results/task1_dpo/results.json`, `summary_table.csv`,
+`length_strata.csv`, `word_limit.csv` and `figures/`.
+
+Defect fix: `task1_dpo/dpo.py` used `beta * (policy_margin + ref_margin)`; the DPO objective requires
+`beta * (policy_margin - ref_margin)`. Pairs whose prompt alone exceeds `max_sequence_length` (768) are
+skipped by the fixed rule `overlong_prompt_policy: skip` and their `source_index` values are logged.
 
 ### Task 2 - PPO
 

@@ -10,6 +10,18 @@ short_ablation_examples: 600
 max_sequence_length: 768
 max_generation_tokens: 256
 max_grad_norm: 1.0
+# Pairs whose prompt alone is >= max_sequence_length cannot be encoded by
+# common.data.encode_prompt_response. "skip" drops them deterministically (same rule for every
+# condition; dropped source_index values are logged); "error" reproduces the starter behaviour.
+overlong_prompt_policy: skip
+# Evaluation protocol (identical for every Task 1 model). Decoding uses the `generation` block
+# from base.yaml (sampled, T=0.7, top_p=0.9) with the global seed reset before each prompt set.
+eval_batch_size: 2
+generation_batch_size: 8
+max_prompt_length: 768
+reward_max_length: 1280
+word_limit_samples_per_prompt: 5
+qualitative_top_k: 15
 standard_output: outputs/task1_dpo/standard
 length_output: outputs/task1_dpo/length_balanced
 results_dir: results/task1_dpo
