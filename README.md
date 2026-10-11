@@ -104,11 +104,25 @@ skipped by the fixed rule `overlong_prompt_policy: skip` and their `source_index
 ### Task 2 - PPO
 
 ```bash
-python -m task2_ppo.continue_train --config configs/ppo.yaml --run-name standard
+export HF_HUB_OFFLINE=1   # all models are cached after the first run; avoids slow hub checks
+python -m task2_ppo.continue_train --config configs/ppo.yaml --run-name standard                 # Step 1: 20 updates
+python -m task2_ppo.evaluate --config configs/ppo.yaml --adapter checkpoints/ppo_midpoint_policy --name midpoint
 python -m task2_ppo.evaluate --config configs/ppo.yaml --adapter outputs/task2_ppo/standard --name standard
-python -m task2_ppo.analyze_clipping --config configs/ppo.yaml
-python -m task2_ppo.ablate_kl --config configs/ppo.yaml
+python -m task2_ppo.analyze_clipping --config configs/ppo.yaml   # Step 2: cached batch + eps forks (8 updates each)
+python -m task2_ppo.ablate_kl --config configs/ppo.yaml          # Step 3: kl_beta forks (8 updates each)
+python -m task2_ppo.summarize --config configs/ppo.yaml          # results.json, CSV tables, figures
 ```
+
+Outputs: policy adapters in `outputs/task2_ppo/<run>/` (critic adapter in `<run>/value/`); per-update logs and
+run metadata in `results/task2_ppo/runs/<run>/`; held-out generations + metrics in `results/task2_ppo/eval/<name>/`;
+cached-batch study in `results/task2_ppo/clipping/`; consolidated `results/task2_ppo/results.json`, CSV tables
+(including paired per-prompt reward differences vs the midpoint) and `figures/`. Fork runs are named
+`fork_eps<eps>_kl<beta>`; the eps=0.2/kl=0.1 fork is shared by both studies.
+
+Defect fix: `task2_ppo/ppo.py::ppo_policy_loss` used `torch.maximum` of the two surrogates; the clipped
+objective requires `torch.minimum` (pessimistic bound). Implementation choices (all in `configs/ppo.yaml`):
+dropout disabled during PPO, raw (un-whitened) GAE advantages, prompts longer than 256 tokens skipped and logged,
+critic score head trained with fp32 master weights under fp16 autocast.
 
 ### Task 3 - GRPO
 

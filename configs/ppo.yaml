@@ -32,3 +32,21 @@ max_grad_norm: 1.0
 output: outputs/task2_ppo/standard
 results_dir: results/task2_ppo
 cached_rollouts: cached/ppo_rollout.pt
+
+# --- Added for the continuation loop and evaluation (see task2_ppo/task2_walkthrough.ipynb) ---
+# PPO convention (TRL default): dropout off during PPO so the first-epoch ratio is exactly 1 and the
+# clip fraction measures policy change, not dropout noise.
+disable_dropout: true
+# One rollout per update: whitening (mean-shifting) advantages within a single response would erase
+# whether that response was better or worse than the critic expected. Raw GAE advantages are used.
+normalize_advantages: false
+# Prompts longer than max_prompt_length chat-template tokens are skipped (batch_generate truncates from
+# the right, which would cut the assistant header). Dropped source_index values are logged per run.
+# Training prompts: filtered rl_prompt_pool_train permuted once with `seed`; runs consume it in order.
+# Held-out evaluation (identical for every model): all filtered rl_prompt_pool_eval prompts, one sampled
+# response each with the base `generation` settings, eval_max_response_length new tokens, seed reset.
+eval_batch_size: 2
+generation_batch_size: 8
+qualitative_top_k: 15
+# Supplementary cached-batch analysis (beyond the release ppo_epochs): repeated epochs per eps.
+clip_sensitivity_epochs: 8
