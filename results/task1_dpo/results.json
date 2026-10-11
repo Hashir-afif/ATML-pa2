@@ -11910,6 +11910,206 @@
         "tokens_mean": 46.38,
         "reward_mean": 3.473671875
       }
+    ],
+    "length_strata_per_token_diagnostic": [
+      {
+        "model": "sft",
+        "stratum": "preferred_longer",
+        "n": 78,
+        "summed_pref_acc": 0.0,
+        "per_token_pref_acc": 0.0,
+        "per_token_chosen_logratio_mean": 0.0,
+        "per_token_rejected_logratio_mean": 0.0,
+        "chosen_tokens_mean": 214.24358974358975,
+        "rejected_tokens_mean": 104.01282051282051
+      },
+      {
+        "model": "sft",
+        "stratum": "length_matched",
+        "n": 80,
+        "summed_pref_acc": 0.0,
+        "per_token_pref_acc": 0.0,
+        "per_token_chosen_logratio_mean": 0.0,
+        "per_token_rejected_logratio_mean": 0.0,
+        "chosen_tokens_mean": 122.85,
+        "rejected_tokens_mean": 123.4
+      },
+      {
+        "model": "sft",
+        "stratum": "rejected_longer",
+        "n": 79,
+        "summed_pref_acc": 0.0,
+        "per_token_pref_acc": 0.0,
+        "per_token_chosen_logratio_mean": 0.0,
+        "per_token_rejected_logratio_mean": 0.0,
+        "chosen_tokens_mean": 102.0379746835443,
+        "rejected_tokens_mean": 204.873417721519
+      },
+      {
+        "model": "standard",
+        "stratum": "preferred_longer",
+        "n": 78,
+        "summed_pref_acc": 0.47435897435897434,
+        "per_token_pref_acc": 0.6794871794871795,
+        "per_token_chosen_logratio_mean": -0.005190405361840498,
+        "per_token_rejected_logratio_mean": -0.011666012174816429,
+        "chosen_tokens_mean": 214.24358974358975,
+        "rejected_tokens_mean": 104.01282051282051
+      },
+      {
+        "model": "standard",
+        "stratum": "length_matched",
+        "n": 80,
+        "summed_pref_acc": 0.525,
+        "per_token_pref_acc": 0.5375,
+        "per_token_chosen_logratio_mean": -0.004841025806396188,
+        "per_token_rejected_logratio_mean": -0.006936203281176667,
+        "chosen_tokens_mean": 122.85,
+        "rejected_tokens_mean": 123.4
+      },
+      {
+        "model": "standard",
+        "stratum": "rejected_longer",
+        "n": 79,
+        "summed_pref_acc": 0.6329113924050633,
+        "per_token_pref_acc": 0.5189873417721519,
+        "per_token_chosen_logratio_mean": -0.00730897099510229,
+        "per_token_rejected_logratio_mean": -0.007866691998230176,
+        "chosen_tokens_mean": 102.0379746835443,
+        "rejected_tokens_mean": 204.873417721519
+      },
+      {
+        "model": "beta_0.03",
+        "stratum": "preferred_longer",
+        "n": 78,
+        "summed_pref_acc": 0.44871794871794873,
+        "per_token_pref_acc": 0.6153846153846154,
+        "per_token_chosen_logratio_mean": -0.0014887721470899673,
+        "per_token_rejected_logratio_mean": -0.0025141673322021767,
+        "chosen_tokens_mean": 214.24358974358975,
+        "rejected_tokens_mean": 104.01282051282051
+      },
+      {
+        "model": "beta_0.03",
+        "stratum": "length_matched",
+        "n": 80,
+        "summed_pref_acc": 0.575,
+        "per_token_pref_acc": 0.575,
+        "per_token_chosen_logratio_mean": -0.0014134557676020142,
+        "per_token_rejected_logratio_mean": -0.0021273746557421906,
+        "chosen_tokens_mean": 122.85,
+        "rejected_tokens_mean": 123.4
+      },
+      {
+        "model": "beta_0.03",
+        "stratum": "rejected_longer",
+        "n": 79,
+        "summed_pref_acc": 0.7215189873417721,
+        "per_token_pref_acc": 0.6582278481012658,
+        "per_token_chosen_logratio_mean": -0.0016261937907174884,
+        "per_token_rejected_logratio_mean": -0.0026678281437605648,
+        "chosen_tokens_mean": 102.0379746835443,
+        "rejected_tokens_mean": 204.873417721519
+      },
+      {
+        "model": "beta_0.1",
+        "stratum": "preferred_longer",
+        "n": 78,
+        "summed_pref_acc": 0.4230769230769231,
+        "per_token_pref_acc": 0.6025641025641025,
+        "per_token_chosen_logratio_mean": -0.00156996026870005,
+        "per_token_rejected_logratio_mean": -0.0027383695527143244,
+        "chosen_tokens_mean": 214.24358974358975,
+        "rejected_tokens_mean": 104.01282051282051
+      },
+      {
+        "model": "beta_0.1",
+        "stratum": "length_matched",
+        "n": 80,
+        "summed_pref_acc": 0.55,
+        "per_token_pref_acc": 0.55,
+        "per_token_chosen_logratio_mean": -0.001566572701167225,
+        "per_token_rejected_logratio_mean": -0.0021856575183195662,
+        "chosen_tokens_mean": 122.85,
+        "rejected_tokens_mean": 123.4
+      },
+      {
+        "model": "beta_0.1",
+        "stratum": "rejected_longer",
+        "n": 79,
+        "summed_pref_acc": 0.759493670886076,
+        "per_token_pref_acc": 0.6708860759493671,
+        "per_token_chosen_logratio_mean": -0.0017214959993990752,
+        "per_token_rejected_logratio_mean": -0.0026438495943033953,
+        "chosen_tokens_mean": 102.0379746835443,
+        "rejected_tokens_mean": 204.873417721519
+      },
+      {
+        "model": "beta_0.3",
+        "stratum": "preferred_longer",
+        "n": 78,
+        "summed_pref_acc": 0.4230769230769231,
+        "per_token_pref_acc": 0.6282051282051282,
+        "per_token_chosen_logratio_mean": -0.001356113322058075,
+        "per_token_rejected_logratio_mean": -0.002508392494939392,
+        "chosen_tokens_mean": 214.24358974358975,
+        "rejected_tokens_mean": 104.01282051282051
+      },
+      {
+        "model": "beta_0.3",
+        "stratum": "length_matched",
+        "n": 80,
+        "summed_pref_acc": 0.6,
+        "per_token_pref_acc": 0.6,
+        "per_token_chosen_logratio_mean": -0.0014228469924566036,
+        "per_token_rejected_logratio_mean": -0.0023006646352249057,
+        "chosen_tokens_mean": 122.85,
+        "rejected_tokens_mean": 123.4
+      },
+      {
+        "model": "beta_0.3",
+        "stratum": "rejected_longer",
+        "n": 79,
+        "summed_pref_acc": 0.759493670886076,
+        "per_token_pref_acc": 0.620253164556962,
+        "per_token_chosen_logratio_mean": -0.0015017033993859207,
+        "per_token_rejected_logratio_mean": -0.0024137627514678735,
+        "chosen_tokens_mean": 102.0379746835443,
+        "rejected_tokens_mean": 204.873417721519
+      },
+      {
+        "model": "length_balanced",
+        "stratum": "preferred_longer",
+        "n": 78,
+        "summed_pref_acc": 0.47435897435897434,
+        "per_token_pref_acc": 0.717948717948718,
+        "per_token_chosen_logratio_mean": -0.011694252859722771,
+        "per_token_rejected_logratio_mean": -0.021699551684285525,
+        "chosen_tokens_mean": 214.24358974358975,
+        "rejected_tokens_mean": 104.01282051282051
+      },
+      {
+        "model": "length_balanced",
+        "stratum": "length_matched",
+        "n": 80,
+        "summed_pref_acc": 0.575,
+        "per_token_pref_acc": 0.575,
+        "per_token_chosen_logratio_mean": -0.01091452647982136,
+        "per_token_rejected_logratio_mean": -0.014726827737621628,
+        "chosen_tokens_mean": 122.85,
+        "rejected_tokens_mean": 123.4
+      },
+      {
+        "model": "length_balanced",
+        "stratum": "rejected_longer",
+        "n": 79,
+        "summed_pref_acc": 0.7721518987341772,
+        "per_token_pref_acc": 0.5569620253164557,
+        "per_token_chosen_logratio_mean": -0.013804962241523047,
+        "per_token_rejected_logratio_mean": -0.016199784931878892,
+        "chosen_tokens_mean": 102.0379746835443,
+        "rejected_tokens_mean": 204.873417721519
+      }
     ]
   }
 }

@@ -105,6 +105,32 @@ def strata_rows(evals, names):
     return rows
 
 
+def per_token_strata_rows(cfg, names):
+    """DIAGNOSTIC (not the manual's summed-log-prob metric): per-token-normalised margin by stratum.
+
+    margin_pt = chosen_logratio / chosen_tokens - rejected_logratio / rejected_tokens. Separates a length
+    effect of summing over tokens from a per-token preference.
+    """
+    root = repo_path(cfg["results_dir"]) / "eval"
+    rows = []
+    for name in names:
+        p = root / name / "pairs_length_stratified_eval.jsonl"
+        if not p.exists():
+            continue
+        pairs = read_jsonl(p)
+        for s in STRATA:
+            R = [r for r in pairs if r["length_stratum"] == s]
+            cl = np.array([r["chosen_logratio"] for r in R]); rl = np.array([r["rejected_logratio"] for r in R])
+            ct = np.array([r["chosen_tokens_scored"] for r in R]); rt = np.array([r["rejected_tokens_scored"] for r in R])
+            rows.append({"model": name, "stratum": s, "n": len(R),
+                         "summed_pref_acc": float(np.mean(cl - rl > 0)),
+                         "per_token_pref_acc": float(np.mean(cl / ct - rl / rt > 0)),
+                         "per_token_chosen_logratio_mean": float(np.mean(cl / ct)),
+                         "per_token_rejected_logratio_mean": float(np.mean(rl / rt)),
+                         "chosen_tokens_mean": float(ct.mean()), "rejected_tokens_mean": float(rt.mean())})
+    return rows
+
+
 def word_limit_rows(evals):
     rows = []
     for name, m in evals.items():
@@ -270,6 +296,8 @@ def build_summary(config_path: str = "configs/dpo.yaml") -> dict:
     write_csv(root / "summary_table.csv", rows)
     write_csv(root / "length_strata.csv", strata_rows(evals, ["sft", "standard", "length_balanced"]))
     write_csv(root / "word_limit.csv", word_limit_rows(evals))
+    pt_rows = per_token_strata_rows(cfg, names)
+    write_csv(root / "length_strata_per_token_diagnostic.csv", pt_rows)
     fig_training_curves(curves, fig_dir)
     fig_beta(evals, betas, fig_dir)
     fig_strata(evals, fig_dir)
@@ -287,7 +315,8 @@ def build_summary(config_path: str = "configs/dpo.yaml") -> dict:
         "training_curves": curves,
         "evaluation": evals,
         "tables": {"summary": rows, "length_strata": strata_rows(evals, ["sft", "standard", "length_balanced"]),
-                   "word_limit": word_limit_rows(evals)},
+                   "word_limit": word_limit_rows(evals),
+                   "length_strata_per_token_diagnostic": pt_rows},
     }
     save_json(root / "results.json", results)
     print(f"Wrote {root / 'results.json'}")
